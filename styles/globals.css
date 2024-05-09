@@ -108,7 +108,7 @@ a {
  }
 
  .login {
-  width: 140%;
+  width: 220%;
   padding: 40px;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -142,16 +142,11 @@ a {
 
 /* register */
 .register {
-  width: 140%;
+  width: 200%;
   padding: 40px;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-
-.register form {
-  width: 100%;
-}
-
 
 .register input[type="username"],
 .register input[type="email"],
