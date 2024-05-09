@@ -32,19 +32,23 @@ async function getUser(req, res) {
 
 async function createUser(req, res) {
   try {
-    const { username, email, password } = req.body;
-    await UserModel.createUser(username, email, password);
+    const { username, email, password ,phone} = req.body;
+ 
+    const user=await UserModel.createUser(username, email, password,phone);
+ 
     return res.status(201).send("User created successfully");
-  } catch (error) {
+  } catch (error) { 
     return res.status(500).json({ message: error.message });
   }
 }
 
 async function updateUser(req, res) {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password,phone } = req.body;
     const { userId } = req.query;
-    await UserModel.updateUserById(userId, username, email, password);
+    console.log("body api/users ",req.body)
+    const updated=await UserModel.updateUserById(userId, username, email,phone);
+    console.log("updated " ,updated)
     return res.status(200).send("User updated successfully");
   } catch (error) {
     return res.status(500).json({ message: error.message });

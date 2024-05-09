@@ -87,12 +87,9 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-image: linear-gradient(to bottom, rgb(247, 248, 248), rgb(255, 225, 225));
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 
 a {
@@ -104,4 +101,76 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.text{
+  padding: 200px 680px;
+ }
+
+ .login {
+  width: 140%;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login form {
+  width: 100%;
+}
+
+.login input[type="email"],
+.login input[type="password"]
+ {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.login button {
+  border: none;
+  background-color: #727272;
+  padding: 10px;
+}
+
+.login button:hover {
+  border: none;
+  background-color: #ffaa9f;
+}
+
+
+/* register */
+.register {
+  width: 140%;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.register form {
+  width: 100%;
+}
+
+
+.register input[type="username"],
+.register input[type="email"],
+.register input[type="password"],
+.register input[type="phone"]
+ {
+  width: 50%; 
+  border: 1px solid #ccc;
+  border-radius: 4px; 
+  margin: 10px;
+}
+
+.register button {
+  border: none;
+  background-color: #727272;
+  margin-top: 15px;
+  padding: 10px;
+}
+.register button:hover {
+  border: none;
+  background-color: #ffaa9f;
 }
