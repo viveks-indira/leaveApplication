@@ -1,43 +1,31 @@
-// // pages/api/loginUser.js
-
-// import UserModel from "./userModel"; // Import your UserModel
-
-// export default async function handler(req, res) {
-//   try {
-//     const { email, password } = req.body;
-//     const user = await UserModel.authenticateUser(email, password);
-//     if (user) {
-//       // If login is successful
-//       console.log("authenticate login function",user)
-//       res.status(200).json(user);
-//     } else {
-//       // If login fails (invalid credentials)
-//       console.log("failes login")
-//       res.status(401).json({ message: "Invalid email or password" });
-//     }
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// }
-
-import UserModel from "./userModel"; // Import your UserModel
-import { generateToken } from "../../../lib/auth"; // Import the generateToken function
+import bcrypt from "bcrypt";
+import { generateToken } from "../../../lib/auth";
+import UserModel from "./userModel";
 
 export default async function handler(req, res) {
+  console.log("inside login route")
   try {
     const { email, password } = req.body;
-    const user = await UserModel.authenticateUser(email, password);
-    console.log("login",user)
+    const user = await UserModel.getUserByEmail(email);
+  //  console.log("login user",user)
     if (user) {
-      // If login is successful
-      const token = generateToken(user); // Generate token using user data
-      console.log("tokrn",token)
-      res.status(200).json({ user, token }); // Return user data and token
+      // Compare hashed password
+      const isPasswordMatch = await bcrypt.compare(password, user.password);
+      if (isPasswordMatch) {
+        // Passwords match, generate token
+        const token = generateToken(user);
+        // console.log("generate token",token)
+         res.status(200).json({ user, token });
+      } else {
+        // Passwords don't match
+        res.status(401).json({ message: "Invalid email or password" });
+      }
     } else {
-      // If login fails (invalid credentials)
+      // User not found
       res.status(401).json({ message: "Invalid email or password" });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 }
+

@@ -18,6 +18,13 @@
       }
     },
 
+    // async createUser(username, email, password, phone) {
+    //   try {
+    //     await pool.query("INSERT INTO user (username, email, password, phone) VALUES (?, ?, ?, ?)", [username, email, password, phone]);
+    //   } catch (error) {
+    //     throw error;
+    //   }
+    // },
     async createUser(username, email, password, phone) {
       try {
         await pool.query("INSERT INTO user (username, email, password, phone) VALUES (?, ?, ?, ?)", [username, email, password, phone]);
@@ -25,10 +32,11 @@
         throw error;
       }
     },
-  
-    async updateUserById(userId, username, email, password, phone) {
+
+    async updateUserById(userId, username, email, phone) {
       try {
-        await pool.query("UPDATE user SET username = ?, email = ?, password = ?, phone = ? WHERE uid = ?", [username, email, password, phone, userId]);  
+       // console.log("userbyid ",userId,username,email,phone)
+        await pool.query("UPDATE user SET username = ?, email = ?, phone = ? WHERE uid = ?", [username, email, phone, userId]);
       } catch (error) {
         throw error;
       }
@@ -44,12 +52,23 @@
     async authenticateUser(email, password) {
       try {
         const [rows] = await pool.query("SELECT * FROM user WHERE email = ? AND password = ?", [email, password]);
- 
+
+        console.log(rows[0])
         return rows[0]; // If a user is found, return the user object
       } catch (error) {
         throw error;
       }
-    }
+    },
+    async getUserByEmail(email) {
+      console.log("getemail")
+      try {
+        const [rows] = await pool.query("SELECT * FROM user WHERE email = ?", [email]);
+ 
+        return rows[0];
+      } catch (error) {
+        throw error;
+      }
+    },
   };
   
   export default UserModel;

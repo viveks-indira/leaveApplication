@@ -1,5 +1,5 @@
 // index.js
-
+import bcrypt from "bcrypt";
 import UserModel from "./userModel";
 
 export default async function handler(req, res) {
@@ -13,8 +13,12 @@ export default async function handler(req, res) {
 
 async function createUser(req, res) {
   try {
-    const { username, email, password,phone } = req.body;
-    const user=await UserModel.createUser(username, email, password,phone);
+    const { username, email, password, phone } = req.body;
+ 
+    const hashedPassword = await bcrypt.hash(password, 2);  
+ 
+    const user=await UserModel.createUser(username, email, hashedPassword, phone);
+
     return res.status(201).send("User created successfully");
   } catch (error) {
     console.log("invalid index")
