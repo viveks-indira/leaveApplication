@@ -33,10 +33,10 @@
       }
     },
 
-    async updateUserById(userId, username, email, phone) {
+    async updateUserById(userId, username, email, phone ,totalLeave) {
       try {
        // console.log("userbyid ",userId,username,email,phone)
-        await pool.query("UPDATE user SET username = ?, email = ?, phone = ? WHERE uid = ?", [username, email, phone, userId]);
+        await pool.query("UPDATE user SET username = ?, email = ?, phone = ? ,totalLeave =? WHERE uid = ?", [username, email, phone, userId,totalLeave]);
       } catch (error) {
         throw error;
       }

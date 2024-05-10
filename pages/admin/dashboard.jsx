@@ -305,6 +305,7 @@ export default function Dashboard() {
     username: "",
     email: "",
     phone: "",
+    totalLeave:"",
   });
 
   useEffect(() => {
@@ -338,6 +339,7 @@ export default function Dashboard() {
       username: userToEdit.username,
       email: userToEdit.email,
       phone: userToEdit.phone,
+      totalLeave: userToEdit.totalLeave,
     });
   };
 
@@ -434,6 +436,16 @@ export default function Dashboard() {
                 backgroundColor: "#f2f2f2",
               }}
             >
+              TotalLeave
+            </th>
+            <th
+              style={{
+                border: "1px solid #dddddd",
+                padding: "8px",
+                textAlign: "left",
+                backgroundColor: "#f2f2f2",
+              }}
+            >
               Action
             </th>
           </tr>
@@ -449,6 +461,9 @@ export default function Dashboard() {
               </td>
               <td style={{ border: "1px solid #dddddd", padding: "8px" }}>
                 {user.phone}
+              </td>
+              <td style={{ border: "1px solid #dddddd", padding: "8px" }}>
+                {user.totalLeave}
               </td>
               <td style={{ border: "1px solid #dddddd", padding: "8px" }}>
                 {editingUser && editingUser.uid === user.uid ? (
@@ -469,6 +484,12 @@ export default function Dashboard() {
                       type="text"
                       name="phone"
                       value={editedData.phone}
+                      onChange={handleInputChange}
+                    />
+                    <input
+                      type="text"
+                      name="totalLeave"
+                      value={editedData.totalLeave}
                       onChange={handleInputChange}
                     />
                     <button
