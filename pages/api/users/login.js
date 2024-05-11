@@ -1,43 +1,70 @@
-// // pages/api/loginUser.js
-
-// import UserModel from "./userModel"; // Import your UserModel
+// import bcrypt from "bcrypt";
+// import { generateToken } from "../../../lib/auth";
+// import UserModel from "./userModel";
 
 // export default async function handler(req, res) {
+//   console.log("inside login route")
 //   try {
 //     const { email, password } = req.body;
-//     const user = await UserModel.authenticateUser(email, password);
+//     const user = await UserModel.getUserByEmail(email);
+//     console.log("inside user password",user.password) 
+//     console.log(" user password",password) 
 //     if (user) {
-//       // If login is successful
-//       console.log("authenticate login function",user)
-//       res.status(200).json(user);
+//       // Compare hashed password
+//       const isPasswordMatch = await bcrypt.compare(user.password, password);
+
+//       console.log("Matched",isPasswordMatch)
+//       if (isPasswordMatch) {
+//         // Passwords match, generate token
+//         const token = generateToken(user);
+//          console.log("generate token",token)
+//          res.status(200).json({ user, token });
+//       } else {
+//         // Passwords don't match
+//         console.log("hashed error");
+//         return res.status(401).json({ message: "Invalid email or hashpassword" });
+//       }
 //     } else {
-//       // If login fails (invalid credentials)
-//       console.log("failes login")
+//       console.log("login error" )
 //       res.status(401).json({ message: "Invalid email or password" });
 //     }
 //   } catch (error) {
+//     console.log(error)
 //     res.status(500).json({ message: error.message });
 //   }
 // }
 
-import UserModel from "./userModel"; // Import your UserModel
-import { generateToken } from "../../../lib/auth"; // Import the generateToken function
+
+// login.js (login route)
+import crypto from "crypto";
+import { generateToken } from "../../../lib/auth";
+import UserModel from "./userModel";
 
 export default async function handler(req, res) {
+  console.log("inside login route");
   try {
     const { email, password } = req.body;
-    const user = await UserModel.authenticateUser(email, password);
-    console.log("login",user)
+    const user = await UserModel.getUserByEmail(email);
+     
     if (user) {
-      // If login is successful
-      const token = generateToken(user); // Generate token using user data
-      console.log("tokrn",token)
-      res.status(200).json({ user, token }); // Return user data and token
+      // Hash the provided password using SHA-256 for comparison
+      const hashedPassword = crypto.createHash("sha256").update(password).digest("hex");
+      
+      if (hashedPassword === user.password) {
+        // Passwords match, generate token
+        const token = generateToken(user); 
+        res.status(200).json({ user, token });
+      } else {
+        // Passwords don't match
+        console.log("hashed error");
+        return res.status(401).json({ message: "Invalid email or hashpassword" });
+      }
     } else {
-      // If login fails (invalid credentials)
+      console.log("login error");
       res.status(401).json({ message: "Invalid email or password" });
     }
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 }

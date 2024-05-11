@@ -44,11 +44,11 @@ async function createUser(req, res) {
 
 async function updateUser(req, res) {
   try {
-    const { username, email, password,phone } = req.body;
+    const { username, email,phone,totalLeave } = req.body;
     const { userId } = req.query;
-    console.log("body api/users ",req.body)
-    const updated=await UserModel.updateUserById(userId, username, email,phone);
-    console.log("updated " ,updated)
+    //console.log("body api/users ",req.body)
+    const updated=await UserModel.updateUserById(userId, username, email,phone,totalLeave);
+ 
     return res.status(200).send("User updated successfully");
   } catch (error) {
     return res.status(500).json({ message: error.message });
