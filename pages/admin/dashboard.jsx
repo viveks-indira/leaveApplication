@@ -103,6 +103,7 @@
 //     username: "",
 //     email: "",
 //     phone: "",
+//     totalLeave:"",
 //   });
 
 //   useEffect(() => {
@@ -128,15 +129,21 @@
 //       username: userToEdit.username,
 //       email: userToEdit.email,
 //       phone: userToEdit.phone,
+//       totalLeave: userToEdit.totalLeave,
 //     });
 //   };
 
-//   const handleDone = () => {
-//     // Clear the editing user state
-//     setEditingUser(null);
-//     // Call handleUpdate with the edited data
-//     handleUpdate(editingUser.uid, editedData);
+//   const handleDone = async () => {
+//     try {
+//       // Call handleUpdate with the edited data
+//       await handleUpdate(editingUser.uid, editedData);
+//       // Clear the editing user state
+//       setEditingUser(null);
+//     } catch (error) {
+//       console.error("Error updating user:", error);
+//     }
 //   };
+  
 
 //   const handleInputChange = (e) => {
 //     const { name, value } = e.target;
@@ -144,7 +151,11 @@
 //       ...prevState,
 //       [name]: value,
 //     }));
+    
+//     // Call handleUpdate to immediately update the backend when any input changes
+//     handleUpdate(editingUser.uid, { ...editedData, [name]: value });
 //   };
+  
 
 //   const handleDelete = async (userId) => {
 //     console.log("deleted", userId);
@@ -222,6 +233,16 @@
 //                 backgroundColor: "#f2f2f2",
 //               }}
 //             >
+//               TotalLeave
+//             </th>
+//             <th
+//               style={{
+//                 border: "1px solid #dddddd",
+//                 padding: "8px",
+//                 textAlign: "left",
+//                 backgroundColor: "#f2f2f2",
+//               }}
+//             >
 //               Action
 //             </th>
 //           </tr>
@@ -237,6 +258,9 @@
 //               </td>
 //               <td style={{ border: "1px solid #dddddd", padding: "8px" }}>
 //                 {user.phone}
+//               </td>
+//               <td style={{ border: "1px solid #dddddd", padding: "8px" }}>
+//                 {user.totalLeave}
 //               </td>
 //               <td style={{ border: "1px solid #dddddd", padding: "8px" }}>
 //                 {editingUser && editingUser.uid === user.uid ? (
@@ -257,6 +281,12 @@
 //                       type="text"
 //                       name="phone"
 //                       value={editedData.phone}
+//                       onChange={handleInputChange}
+//                     />
+//                     <input
+//                       type="text"
+//                       name="totalLeave"
+//                       value={editedData.totalLeave}
 //                       onChange={handleInputChange}
 //                     />
 //                     <button

@@ -30,6 +30,7 @@ export default function LoginPage() {
         },
         body: JSON.stringify(formData),
       });
+      
       console.log("response" ,response)
       if (response.ok) {
         const data = await response.json();
@@ -38,8 +39,8 @@ export default function LoginPage() {
         const {password} = data.user; 
          console.log("login data ",data.user)
         localStorage.setItem("token", token);
-        localStorage.setItem("email", email);
-        localStorage.setItem("password", password);
+        // localStorage.setItem("email", email);
+        // localStorage.setItem("password", password);
 
         router.push("/home/page");
       } else {
