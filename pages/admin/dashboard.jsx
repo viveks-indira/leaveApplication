@@ -329,6 +329,7 @@ import { verifyToken } from "../../lib/auth";
 
 export default function Dashboard() {
   const router = useRouter();
+  const [loggedIn, setLoggedIn] = useState(true); 
   const [users, setUsers] = useState([]);
   const [editingUser, setEditingUser] = useState(null);
   const [editedData, setEditedData] = useState({
@@ -420,16 +421,28 @@ export default function Dashboard() {
     }
   };
 
+  //logout functionality
   function handleLogout() {
-    // Add logic to handle logout
+    // Clear the token from local storage
+    localStorage.removeItem('token'); // Assuming you stored the token in localStorage
+ 
+    setLoggedIn(false);
+    router.push("/login/page"); // Redirect to the login page
   }
-  // Other functions remain the same...
+
+  function handleHome() {
+    // Clear the token from local storage
+    router.push("/home/page"); // Redirect to the login page
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="navbar">
         <h1>Admin Dashboard</h1>
         <button onClick={handleLogout}>Logout</button>
+      </div>
+      <div className="backHome">
+      <button onClick={handleHome}> ← Back To Home</button>
       </div>
       <div style={{ margin: "20px" }}>
       <table style={{ width: "100%", backgroundColor: "white" }}>
@@ -473,7 +486,7 @@ export default function Dashboard() {
                 backgroundColor: "#f2f2f2",
               }}
             >
-              TotalLeave
+              Remaining Leave
             </th>
             <th
               style={{
@@ -500,7 +513,7 @@ export default function Dashboard() {
                 {user.phone}
               </td>
               <td style={{ border: "1px solid #dddddd", padding: "8px" }}>
-                {user.totalLeave}
+                {user.totalLeave}  out of 20
               </td>
               <td style={{ border: "1px solid #dddddd", padding: "8px" }}>
                 {editingUser && editingUser.uid === user.uid ? (

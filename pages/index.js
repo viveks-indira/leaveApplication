@@ -20,42 +20,7 @@ export default function IndexPage() {
       </Link>
     </div>
   </div>
-  <style jsx>{`
-        .containerIndex {
-          border: 2px solid black;
-          margin: 12% auto;
-          padding: 20px;
-          max-width: 400px;
-          text-align: center;
-          border-radius: 10px;
-        }
-        .title {
-          margin-bottom: 20px;
-        }
-        .button-container {
-          display: flex;
-          justify-content: center;
-          gap: 20px;
-        }
-        .button {
-          flex: 1;
-          padding: 5px
-        }
-        .login-button {
-          width: 100%;
-          margin-top: 2px;
-          padding: 8px 20px;
-          border: none;
-          cursor: pointer;
-          border-radius: 5px;
-          background-color: #007bff;
-          color: white;
-          font-size: 16px;
-        }
-        .login-button:hover {
-          background-color: #0056b3;
-        }
-      `}</style>
+
 </div>
   );
 }

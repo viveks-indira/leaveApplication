@@ -51,7 +51,7 @@ const UserModel = {
     }
   },
   async getUserByEmail(email) {
-    console.log("getemail")
+    //console.log("getemail")
     try {
       const [rows] = await pool.query("SELECT * FROM user WHERE email = ?", [email]);
      // console.log("rows data", rows[0])
