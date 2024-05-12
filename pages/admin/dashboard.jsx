@@ -420,11 +420,18 @@ export default function Dashboard() {
     }
   };
 
+  function handleLogout() {
+    // Add logic to handle logout
+  }
   // Other functions remain the same...
 
   return (
-    <div style={{ margin: "20px" }}>
-      <h1>User Dashboard</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="navbar">
+        <h1>Admin Dashboard</h1>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
+      <div style={{ margin: "20px" }}>
       <table style={{ width: "100%", backgroundColor: "white" }}>
         <thead>
           <tr>
@@ -551,5 +558,7 @@ export default function Dashboard() {
         </tbody>
       </table>
     </div>
+    </div>
+  
   );
 }

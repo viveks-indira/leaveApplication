@@ -4,24 +4,24 @@ import Link from "next/link";
 
 export default function IndexPage() {
   return (
-    <div className="container">
-      <h1 className="title">Welcome to our Application</h1>
-      <div className="button-container">
-        <div className="button">
-          <h2>Login</h2>
-          <Link href="/login/page">
-            <button className="login-button">Login</button>
-          </Link>
-        </div>
-        <div className="button">
-          <h2>Register</h2>
-          <Link href="/register/page">
-            <button className="login-button">Register</button>
-          </Link>
-        </div>
-      </div>
-      <style jsx>{`
-        .container {
+    <div className="containerIndex">
+  <h1 className="title">Welcome to our Application</h1>
+  <div className="button-container">
+    <div className="button">
+      <h2>Login</h2>
+      <Link href="/login/page">
+        <button className="login-button">Login</button>
+      </Link>
+    </div>
+    <div className="button">
+      <h2>Register</h2>
+      <Link href="/register/page">
+        <button className="login-button">Register</button>
+      </Link>
+    </div>
+  </div>
+  <style jsx>{`
+        .containerIndex {
           border: 2px solid black;
           margin: 12% auto;
           padding: 20px;
@@ -43,6 +43,7 @@ export default function IndexPage() {
         }
         .login-button {
           width: 100%;
+          margin-top: 2px;
           padding: 8px 20px;
           border: none;
           cursor: pointer;
@@ -55,6 +56,6 @@ export default function IndexPage() {
           background-color: #0056b3;
         }
       `}</style>
-    </div>
+</div>
   );
 }

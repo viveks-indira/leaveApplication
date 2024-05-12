@@ -1,7 +1,8 @@
 // sendEmail.js (email sending route)
 import nodemailer from "nodemailer";
 
-export default async function handler(req, res) {
+export default async function POST(req, res) {
+    console.log("email body ",req.body)
   try {
     const { to, subject, message } = req.body;
 

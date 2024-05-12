@@ -39,8 +39,7 @@ export default function LoginPage() {
         const {password} = data.user; 
          console.log("login data ",data.user)
         localStorage.setItem("token", token);
-        // localStorage.setItem("email", email);
-        // localStorage.setItem("password", password);
+        localStorage.setItem("email", email);
 
         router.push("/home/page");
       } else {
